@@ -34,3 +34,6 @@ s.Command(schedule.RunFunc(func(ctx context.Context) {
     fmt.Println("I run only mondays, but every fifteen minutes of that weekday", time.Now())
 })).Mondays().EveryFifteenMinutes()
 ```
+
+### Matchers
+The chainable matchers can be found on the [Entry](https://godoc.org/github.com/bastiankoetsier/schedule#Entry) type.
