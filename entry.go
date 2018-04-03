@@ -80,7 +80,7 @@ func (e *Entry) Daily() *Entry {
 }
 
 // DailyAt gives you more flexibility in specifying exactly at what time the Runner should be executed
-// You need to specify the spec like "15:23".
+// You need to specify the spec like "15:23". This func panics if an invalid argument is given!
 func (e *Entry) DailyAt(spec string) *Entry {
 	segments := strings.Split(spec, ":")
 	if len(segments) != 2 {
