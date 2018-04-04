@@ -1,5 +1,6 @@
 # Schedule
 <a href="https://godoc.org/github.com/bastiankoetsier/schedule"><img src="https://godoc.org/github.com/bastiankoetsier/schedule?status.svg" alt="GoDoc" /></a>
+[![Go Report Card](https://goreportcard.com/badge/github.com/bastiankoetsier/schedule)](https://goreportcard.com/report/github.com/bastiankoetsier/schedule)
 
 
 Schedule is a small library that helps you specify recurring tasks in a cronjob-like interface (without actually using cron's syntax).
