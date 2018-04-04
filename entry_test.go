@@ -2,8 +2,6 @@ package schedule
 
 import "testing"
 
-const defaultExp = "* * * * * *"
-
 func TestEveryMinuteReturnsOneStarFollowing(t *testing.T) {
 	e := &Entry{expression: defaultExp}
 	e.EveryMinute()

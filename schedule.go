@@ -8,6 +8,8 @@ import (
 	"github.com/gorhill/cronexpr"
 )
 
+const defaultExp = "* * * * * *"
+
 // Schedule is the main type that "stores" the jobs to execute
 type Schedule struct {
 	jobs []*Entry
@@ -28,7 +30,7 @@ func (r RunFunc) Run(ctx context.Context) {
 
 // Command sets a new command in the scheduler. It returns an entry which can be used to set a time schedule.
 func (s *Schedule) Command(r Runner) *Entry {
-	e := &Entry{expression: "* * * * * *", Command: r}
+	e := &Entry{expression: defaultExp, Command: r}
 	s.jobs = append(s.jobs, e)
 	return e
 }
@@ -53,7 +55,6 @@ func (s *Schedule) Start(ctx context.Context) <-chan struct{} {
 					nextRun := cronexpr.MustParse(e.String()).Next(lastRun)
 					if nextRun.Before(now) {
 						e.Command.Run(ctx)
-						continue
 					}
 				}
 			}
