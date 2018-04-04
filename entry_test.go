@@ -2,17 +2,19 @@ package schedule
 
 import "testing"
 
+const defaultExp = "* * * * * *"
+
 func TestEveryMinuteReturnsOneStarFollowing(t *testing.T) {
-	e := &Entry{expression: "* * * * * *"}
+	e := &Entry{expression: defaultExp}
 	e.EveryMinute()
 
-	exp := "* * * * * *"
+	exp := defaultExp
 	if e.expression != exp {
 		t.Errorf("expected '%s', got '%s'", exp, e.expression)
 	}
 }
 func TestEveryFiveMinutesReturnsStarSlashFiveOnPositionOne(t *testing.T) {
-	e := &Entry{expression: "* * * * * *"}
+	e := &Entry{expression: defaultExp}
 	e.EveryFiveMinutes()
 
 	exp := "*/5 * * * * *"
@@ -21,7 +23,7 @@ func TestEveryFiveMinutesReturnsStarSlashFiveOnPositionOne(t *testing.T) {
 	}
 }
 func TestEveryTenMinutesReturnsStarSlashTenOnPositionOne(t *testing.T) {
-	e := &Entry{expression: "* * * * * *"}
+	e := &Entry{expression: defaultExp}
 	e.EveryTenMinutes()
 
 	exp := "*/10 * * * * *"
@@ -30,7 +32,7 @@ func TestEveryTenMinutesReturnsStarSlashTenOnPositionOne(t *testing.T) {
 	}
 }
 func TestEveryFifteenMinutesReturnsStarSlashFifteenOnPositionOne(t *testing.T) {
-	e := &Entry{expression: "* * * * * *"}
+	e := &Entry{expression: defaultExp}
 	e.EveryFifteenMinutes()
 
 	exp := "*/15 * * * * *"
@@ -39,7 +41,7 @@ func TestEveryFifteenMinutesReturnsStarSlashFifteenOnPositionOne(t *testing.T) {
 	}
 }
 func TestEveryThirtyMinutesReturnsZeroCommaThirtyOnPositionOne(t *testing.T) {
-	e := &Entry{expression: "* * * * * *"}
+	e := &Entry{expression: defaultExp}
 	e.EveryThirtyMinutes()
 
 	exp := "0,30 * * * * *"
@@ -49,7 +51,7 @@ func TestEveryThirtyMinutesReturnsZeroCommaThirtyOnPositionOne(t *testing.T) {
 }
 
 func TestHourlyReturnsZeroInPositionOne(t *testing.T) {
-	e := &Entry{expression: "* * * * * *"}
+	e := &Entry{expression: defaultExp}
 	e.Hourly()
 
 	exp := "0 * * * * *"
@@ -59,7 +61,7 @@ func TestHourlyReturnsZeroInPositionOne(t *testing.T) {
 }
 
 func TestDailyReturnsZeroInPositionOneAndTwo(t *testing.T) {
-	e := &Entry{expression: "* * * * * *"}
+	e := &Entry{expression: defaultExp}
 	e.Daily()
 
 	exp := "0 0 * * * *"
@@ -87,7 +89,7 @@ func TestDailyAtReturnsAppropriateExpression(t *testing.T) {
 	}
 	for _, tC := range testCases {
 		t.Run(tC.desc, func(t *testing.T) {
-			e := &Entry{expression: "* * * * * *"}
+			e := &Entry{expression: defaultExp}
 			e.DailyAt(tC.givenSpec)
 
 			if e.expression != tC.expected {
@@ -98,7 +100,7 @@ func TestDailyAtReturnsAppropriateExpression(t *testing.T) {
 }
 
 func TestWeeklyReturnsZeroInPositionOneAndTwoAndFive(t *testing.T) {
-	e := &Entry{expression: "* * * * * *"}
+	e := &Entry{expression: defaultExp}
 	e.Weekly()
 
 	exp := "0 0 * * 0 *"
@@ -107,7 +109,7 @@ func TestWeeklyReturnsZeroInPositionOneAndTwoAndFive(t *testing.T) {
 	}
 }
 func TestWeekdaysReturnsCommaJoinedOneToFiveOnPositionFive(t *testing.T) {
-	e := &Entry{expression: "* * * * * *"}
+	e := &Entry{expression: defaultExp}
 	e.Weekdays()
 
 	exp := "* * * * 1,2,3,4,5 *"
@@ -135,7 +137,7 @@ func TestDaysReturnsCommaJoinedDaysOnPositionFive(t *testing.T) {
 	}
 	for _, tC := range testCases {
 		t.Run(tC.desc, func(t *testing.T) {
-			e := &Entry{expression: "* * * * * *"}
+			e := &Entry{expression: defaultExp}
 			e.Days(tC.days...)
 			if e.expression != tC.expected {
 				t.Errorf("expected '%s', got '%s'", tC.expected, e.expression)
@@ -145,7 +147,7 @@ func TestDaysReturnsCommaJoinedDaysOnPositionFive(t *testing.T) {
 }
 
 func TestMondaysReturnsOneInPositionFive(t *testing.T) {
-	e := &Entry{expression: "* * * * * *"}
+	e := &Entry{expression: defaultExp}
 	e.Mondays()
 	exp := "* * * * 1 *"
 	if e.expression != exp {
@@ -153,7 +155,7 @@ func TestMondaysReturnsOneInPositionFive(t *testing.T) {
 	}
 }
 func TestTuesdaysReturnsTwoInPositionFive(t *testing.T) {
-	e := &Entry{expression: "* * * * * *"}
+	e := &Entry{expression: defaultExp}
 	e.Tuesdays()
 	exp := "* * * * 2 *"
 	if e.expression != exp {
@@ -161,7 +163,7 @@ func TestTuesdaysReturnsTwoInPositionFive(t *testing.T) {
 	}
 }
 func TestWednesdaysReturnsThreeInPositionFive(t *testing.T) {
-	e := &Entry{expression: "* * * * * *"}
+	e := &Entry{expression: defaultExp}
 	e.Wednesdays()
 	exp := "* * * * 3 *"
 	if e.expression != exp {
@@ -169,7 +171,7 @@ func TestWednesdaysReturnsThreeInPositionFive(t *testing.T) {
 	}
 }
 func TestThurdaysReturnsFourInPositionFive(t *testing.T) {
-	e := &Entry{expression: "* * * * * *"}
+	e := &Entry{expression: defaultExp}
 	e.Thursdays()
 	exp := "* * * * 4 *"
 	if e.expression != exp {
@@ -177,7 +179,7 @@ func TestThurdaysReturnsFourInPositionFive(t *testing.T) {
 	}
 }
 func TestFridaysReturnsFiveInPositionFive(t *testing.T) {
-	e := &Entry{expression: "* * * * * *"}
+	e := &Entry{expression: defaultExp}
 	e.Fridays()
 	exp := "* * * * 5 *"
 	if e.expression != exp {
@@ -185,7 +187,7 @@ func TestFridaysReturnsFiveInPositionFive(t *testing.T) {
 	}
 }
 func TestSaturdaysReturnsSixInPositionFive(t *testing.T) {
-	e := &Entry{expression: "* * * * * *"}
+	e := &Entry{expression: defaultExp}
 	e.Saturdays()
 	exp := "* * * * 6 *"
 	if e.expression != exp {
@@ -193,7 +195,7 @@ func TestSaturdaysReturnsSixInPositionFive(t *testing.T) {
 	}
 }
 func TestSundaysReturnsZeroInPositionFive(t *testing.T) {
-	e := &Entry{expression: "* * * * * *"}
+	e := &Entry{expression: defaultExp}
 	e.Sundays()
 	exp := "* * * * 0 *"
 	if e.expression != exp {
@@ -202,7 +204,7 @@ func TestSundaysReturnsZeroInPositionFive(t *testing.T) {
 }
 
 func TestMondaysHourlyReturnsZeroInPositionOneAndOneInPositionFive(t *testing.T) {
-	e := &Entry{expression: "* * * * * *"}
+	e := &Entry{expression: defaultExp}
 	e.Mondays().Hourly()
 
 	exp := "0 * * * 1 *"
@@ -212,7 +214,7 @@ func TestMondaysHourlyReturnsZeroInPositionOneAndOneInPositionFive(t *testing.T)
 }
 
 func TestCombinedSpecsDontOverwriteEachOther(t *testing.T) {
-	e := &Entry{expression: "* * * * * *"}
+	e := &Entry{expression: defaultExp}
 	e.EveryFiveMinutes()
 	e.Mondays()
 
@@ -220,4 +222,22 @@ func TestCombinedSpecsDontOverwriteEachOther(t *testing.T) {
 	if e.expression != exp {
 		t.Errorf("expected '%s', got '%s'", exp, e.expression)
 	}
+}
+
+func TestStringer(t *testing.T) {
+	e := &Entry{expression: defaultExp}
+
+	if e.String() != defaultExp {
+		t.Errorf("expexted '%s', got '%s", defaultExp, e.String())
+	}
+}
+
+func TestDailyAtPanics(t *testing.T) {
+	defer func() {
+		if r := recover(); r == nil {
+			t.Error("DailyAt should panic if invalid segment is given")
+		}
+	}()
+	e := &Entry{expression: defaultExp}
+	e.DailyAt("foooo")
 }
